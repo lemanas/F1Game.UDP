@@ -66,7 +66,11 @@ sealed class AutoInlineArrayGeneratorTests
 
 		var runResult = RunGenerator<AutoInlineArrayGenerator>(inputCode);
 
-		return Verify(runResult, _settings);
+		var settings = new VerifySettings();
+		settings.UseDirectory("snapshots");
+		settings.UseMethodName("NonGenericNoTypeDiagnostic");
+
+		return Verify(runResult, settings);
 	}
 
 	[Test]
