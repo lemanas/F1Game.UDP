@@ -1,9 +1,0 @@
-﻿<FineCodeCoverage>
-  <Enabled>
-    True
-  </Enabled>
-  <!-- and more -->
-  <IncludeTestAssembly>
-    False
-  </IncludeTestAssembly>
-</FineCodeCoverage>
