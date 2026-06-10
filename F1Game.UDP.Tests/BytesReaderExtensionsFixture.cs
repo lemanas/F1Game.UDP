@@ -155,7 +155,7 @@ sealed class BytesReaderExtensionsFixture
 	[Test]
 	public void GetNextEnum_ShouldReturnEnumValue()
 	{
-		var bytes = new byte[] { 0x02 };
+		var bytes = new byte[] { 0x02, 0x00, 0x00, 0x00 };
 		var reader = CreateBytesReader(bytes);
 
 		var result = reader.GetNextEnum<TestEnum>();

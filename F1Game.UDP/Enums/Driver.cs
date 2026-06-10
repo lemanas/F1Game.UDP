@@ -6,7 +6,7 @@ namespace F1Game.UDP.Enums;
 /// Represents a driver in the F1 game, including real-world, classic, F2, fictional, and esports drivers.
 /// The value corresponds to the driver's unique identifier as used in UDP packets.
 /// </summary>
-public enum Driver : byte
+public enum Driver : ushort
 {
 	CarlosSainz = 0,
 	DaniilKvyat = 1,
@@ -83,6 +83,7 @@ public enum Driver : byte
 	NobuharuMatsushita = 78,
 	NikitaMazepin = 79,
 	GuanyaZhou = 80,
+	GuanyuZhou = GuanyaZhou,
 	MickSchumacher = 81,
 	CallumIlott = 82,
 	JuanManuelCorrea = 83,
@@ -164,5 +165,24 @@ public enum Driver : byte
 	RafaelVillagomez = 167,
 	ZakOSullivan = 168,
 	PepeMarti = 169,
+	SonnyHayes = 170,
+	JoshuaPearce = 171,
+	CallumVoisin = 172,
+	MatiasZagazeta = 173,
+	NikolaTsolov = 174,
+	TimTramnitz = 175,
+	LucaCortez = 185,
+	LukeBrowning = 186,
+	CianShields = 187,
+	ArvidLindblad = 188,
+	DinoBeganovic = 189,
+	LeonardoFornaroli = 190,
+	OliverGoethe = 191,
+	GabrieleMini = 192,
+	SebastianMontoya = 193,
+	AlexanderDunne = 194,
+	MaxEsterson = 195,
+	SamiMeguetounif = 196,
+	JohnBennett = 197,
 	NetworkHuman = 255
 }

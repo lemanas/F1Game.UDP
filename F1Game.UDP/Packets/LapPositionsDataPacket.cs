@@ -9,9 +9,9 @@ namespace F1Game.UDP.Packets;
 /// different <see cref="StartingLap" /> parameters. The whole lap position history can be recreated merging both of these.
 /// <para>Frequency: 1 per second</para>
 /// </summary>
-public readonly record struct LapPositionsDataPacket() : IByteParsable<LapPositionsDataPacket>, IByteWritable, ISizeable, IHaveHeader
+public readonly record struct LapPositionsDataPacket : IByteParsable<LapPositionsDataPacket>, IByteWritable, ISizeable, IHaveHeader
 {
-	static int ISizeable.Size => 1131;
+	static int ISizeable.Size => 1231;
 
 	/// <inheritdoc/>
 	public PacketHeader Header { get; init; }
@@ -26,17 +26,17 @@ public readonly record struct LapPositionsDataPacket() : IByteParsable<LapPositi
 	/// <summary>
 	/// Array holding the position of the car in a given lap, 0 if no record
 	/// </summary>
-	public Array50<Array22<byte>> PositionsPerLapForVehicle { get; init; }
+	public Array50<Array24<byte>> PositionsPerLapForVehicle { get; init; }
 
 	static LapPositionsDataPacket IByteParsable<LapPositionsDataPacket>.Parse(ref BytesReader reader)
 	{
 		var header = reader.GetNextObject<PacketHeader>();
 		var numberOfLaps = reader.GetNextByte();
 		var startingLap = reader.GetNextByte();
-		var positionsPerLapForVehicle = new Array50<Array22<byte>>();
+		var positionsPerLapForVehicle = new Array50<Array24<byte>>();
 
 		foreach (ref var positionsForVehicles in positionsPerLapForVehicle.AsSpan())
-			positionsForVehicles = reader.GetNextBytes(22);
+			positionsForVehicles = reader.GetNextBytes(24);
 
 		return new()
 		{

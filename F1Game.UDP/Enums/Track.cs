@@ -41,4 +41,8 @@ public enum Track : sbyte
 	Miami = 30,
 	LasVegas = 31,
 	Qatar = 32,
+	SilverstoneReverse = 39,
+	AustriaReverse = 40,
+	ZandvoortReverse = 41,
+	Madrid = 42
 }

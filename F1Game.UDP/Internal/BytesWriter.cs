@@ -92,6 +92,10 @@ ref struct BytesWriter(byte[] bytes)
 			Write(Unsafe.As<T, byte>(ref value));
 		if (type == typeof(sbyte))
 			Write(Unsafe.As<T, sbyte>(ref value));
+		if (type == typeof(ushort))
+			Write(Unsafe.As<T, ushort>(ref value));
+		if (type == typeof(short))
+			Write(Unsafe.As<T, short>(ref value));
 		if (type == typeof(int))
 			Write(Unsafe.As<T, int>(ref value));
 		if (type == typeof(uint))

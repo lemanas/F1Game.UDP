@@ -10,7 +10,7 @@ namespace F1Game.UDP.Packets;
 [StructLayout(LayoutKind.Sequential, Pack = 1)]
 public readonly record struct SessionDataPacket() : IByteParsable<SessionDataPacket>, ISizeable, IByteWritable, IHaveHeader
 {
-	static int ISizeable.Size => 753;
+	static int ISizeable.Size => 832;
 
 	/// <inheritdoc/>
 	public PacketHeader Header { get; init; }
@@ -322,6 +322,38 @@ public readonly record struct SessionDataPacket() : IByteParsable<SessionDataPac
 	/// Distance in m around track where sector 3 start
 	/// </summary>
 	public float Sector3LapDistanceStart { get; init; }
+	/// <summary>
+	/// Number of activation zones in <see cref="ActivationZones"/>.
+	/// </summary>
+	public byte NumActivationZones { get; init; }
+	/// <summary>
+	/// Activation zones around the circuit.
+	/// </summary>
+	public Array8<ActivationZone> ActivationZones { get; init; }
+	/// <summary>
+	/// Current active aero status.
+	/// </summary>
+	public byte ActiveAeroStatus { get; init; }
+	/// <summary>
+	/// Anti-lock brakes assist option for the session.
+	/// </summary>
+	public AntiLockBrakesOptions AntiLockBrakesAssist { get; init; }
+	/// <summary>
+	/// Traction control assist option for the session.
+	/// </summary>
+	public TractionOptions TractionControlAssist { get; init; }
+	/// <summary>
+	/// Hi-vis assist option.
+	/// </summary>
+	public byte HiVisAssist { get; init; }
+	/// <summary>
+	/// Colourblind assist option.
+	/// </summary>
+	public byte ColourblindAssist { get; init; }
+	/// <summary>
+	/// Rewind prompt option.
+	/// </summary>
+	public bool RewindPrompt { get; init; }
 
 	static SessionDataPacket IByteParsable<SessionDataPacket>.Parse(ref BytesReader reader)
 	{
@@ -404,7 +436,15 @@ public readonly record struct SessionDataPacket() : IByteParsable<SessionDataPac
 			NumSessionsInWeekend = reader.GetNextByte(),
 			WeekendStructure = reader.GetNextEnums<SessionType>(12),
 			Sector2LapDistanceStart = reader.GetNextFloat(),
-			Sector3LapDistanceStart = reader.GetNextFloat()
+			Sector3LapDistanceStart = reader.GetNextFloat(),
+			NumActivationZones = reader.GetNextByte(),
+			ActivationZones = reader.GetNextObjects<ActivationZone>(8),
+			ActiveAeroStatus = reader.GetNextByte(),
+			AntiLockBrakesAssist = reader.GetNextEnum<AntiLockBrakesOptions>(),
+			TractionControlAssist = reader.GetNextEnum<TractionOptions>(),
+			HiVisAssist = reader.GetNextByte(),
+			ColourblindAssist = reader.GetNextByte(),
+			RewindPrompt = reader.GetNextBoolean()
 		};
 	}
 
@@ -488,5 +528,13 @@ public readonly record struct SessionDataPacket() : IByteParsable<SessionDataPac
 		writer.WriteEnums(WeekendStructure.AsReadOnlySpan());
 		writer.Write(Sector2LapDistanceStart);
 		writer.Write(Sector3LapDistanceStart);
+		writer.Write(NumActivationZones);
+		writer.Write(ActivationZones.AsReadOnlySpan());
+		writer.Write(ActiveAeroStatus);
+		writer.WriteEnum(AntiLockBrakesAssist);
+		writer.WriteEnum(TractionControlAssist);
+		writer.Write(HiVisAssist);
+		writer.Write(ColourblindAssist);
+		writer.Write(RewindPrompt);
 	}
 }

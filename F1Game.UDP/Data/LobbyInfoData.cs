@@ -8,7 +8,7 @@ namespace F1Game.UDP.Data;
 [StructLayout(LayoutKind.Sequential, Pack = 1)]
 public readonly record struct LobbyInfoData() : IByteParsable<LobbyInfoData>, IByteWritable, ISizeable
 {
-	static int ISizeable.Size => 42;
+	static int ISizeable.Size => 43;
 
 	/// <summary>
 	/// Gets whether the vehicle is AI or Human.
